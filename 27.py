@@ -1,6 +1,6 @@
 __author__ = 'Ruslan'
 
-from Library.sieve import sieve
+from lib.sieve import sieve
 primes = sieve(1000000)
 b_range = sieve(1000)
 a_best = -1000
