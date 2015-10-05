@@ -1,12 +1,6 @@
-from Library.math import binomial
-from Library.sieve import sieve
-from Library.algorithm import quicksort_iterative
-from Library.algorithm import mergesort_iterative
+from lib.sort import quicksort_iterative,quicksort_recursive,mergesort_iterative,mergesort_recursive
 from random import random
 from math import floor
-__author__ = 'Ruslan'
-
-import Library.math
 import time
 
 # t1 = time.time()
@@ -25,12 +19,24 @@ import time
 # t2 = time.time()
 # print(t2 - t1)
 
-t1 = time.time()
-numbers = 1000
+numbers = 1000000
 array = []
 for i in range(numbers):
     array.append(floor(random()*numbers))
-mergesort_iterative(array)
+t1 = time.time()
+tmp = list(array)
+mergesort_recursive(tmp,0,len(array))
 t2 = time.time()
 print(t2 - t1)
-print(array)
+#print(tmp)
+tmp = list(array)
+t1 = time.time()
+mergesort_iterative(tmp,0,len(array))
+t2 = time.time()
+print(t2 - t1)
+#print(tmp)
+tmp = list(array)
+t1 = time.time()
+sorted(tmp)
+t2 = time.time()
+print(t2 - t1)

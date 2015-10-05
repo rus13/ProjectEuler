@@ -1,20 +1,14 @@
 __author__ = 'Ruslan'
 
+from itertools import permutations,combinations
 
-def isPand(l):
-    if len(l) != 9:
-        return False;
-    else:
-        count = [False]*9
-        for i in l:
-            if count[i]:
-                return False
-            count[i] = True
-
-
-s = 0
-
-for i in range(10, 999):
-    for j in range(10,999):
-        mult = i*j
-        l = str
+found = set()
+for p in permutations("123456789"):
+    for c in combinations(range(1,9), 2):
+        i, j = c
+        multiplicand = int(''.join(p[:i]))
+        multiplier = int(''.join(p[i:j]))
+        product = int(''.join(p[j:]))
+        if multiplicand * multiplier == product:
+            found.add(product)
+print(sum(found))

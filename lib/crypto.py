@@ -1,4 +1,3 @@
-__author__ = 'Ruslan'
 import random
 import sys
 import fractions

@@ -21,7 +21,7 @@ def fib(n):
 
 def power(a, n):
     b = "{0:b}".format(n)
-    d = [[0]*len(a) for i in range(len(a))]
+    d = [[0]*len(a)]*len(a)
     for i in range(len(a)):
         d[i][i] = 1
     for i in b:

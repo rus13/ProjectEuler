@@ -3,9 +3,7 @@ import random, math
 
 
 def swap(array, l1, l2):
-    tmp = array[l1]
-    array[l1] = array[l2]
-    array[l2] = tmp
+    array[l1], array[l2] = array[l2], array[l1]
 
 
 def partition(array, l, r, pivot_ind):
@@ -49,14 +47,12 @@ def quicksort_iterative(array, l, r):
 
 
 def merge(array, left, mid, right):
-    n1 = mid - left + 1
-    n2 = right - mid
-    copy_left = array[left:mid+1]
-    copy_right = array[mid+1:right+1]
+    copy_left = array[left:mid]
+    copy_right = array[mid:right]
     i = 0
     j = 0
     k = left
-    while (i < n1) & (j < n2):
+    while (i  < len(copy_left)) & (j  < len(copy_right)):
         if copy_left[i] < copy_right[j]:
             array[k] = copy_left[i]
             i += 1
@@ -64,21 +60,31 @@ def merge(array, left, mid, right):
             array[k] = copy_right[j]
             j += 1
         k += 1
-    while i < n1:
+    while i < len(copy_left):
         array[k] = copy_left[i]
         i += 1
         k += 1
-    while j < n2:
-        array[k] = copy_left[j]
+    while j < len(copy_right):
+        array[k] = copy_right[j]
         j += 1
         k += 1
 
 
-def mergesort_iterative(array):
+def mergesort_iterative(array, l, r):
     n = len(array)
-    for size in range(1, n):
-        for left in range(0, n, 2*size):
-            mid = left + size - 1
-            if mid < n:
-                right = min(left + 2*size - 1, n-1)
-                merge(array, left, mid, right)
+    size = 1
+    while size < n:
+        for left in range(l, r - size, 2*size):
+            mid = left + size
+            right = min(left + 2*size, n)
+            merge(array, left, mid, right)
+        size *= 2
+
+
+def mergesort_recursive(array, l, r):
+    if l + 1 >= r:
+        return
+    mid = (l+r)//2
+    mergesort_recursive(array, l, mid)
+    mergesort_recursive(array, mid, r)
+    merge(array,l,mid,r)
